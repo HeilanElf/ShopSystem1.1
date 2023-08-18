@@ -117,8 +117,18 @@ class LogIn {
                     System.out.println("管理员不存在或密码错误！");
                     System.out.print("用户名：");
                     userName = scanner.next();
-                    System.out.print("密码：");
-                    password = isTrueEnter.passwordhefa(scanner.next());
+                    if(adminExit(userName)){
+                        System.out.print("密码：");
+                        password = isTrueEnter.passwordhefa(scanner.next());
+                    }else{
+                        System.out.println("用户名或密码错误，是否继续？（Y/N）");
+                        String confirm=scanner.next();
+                        if(!confirm.equalsIgnoreCase("Y")){
+                            count=10;
+                            break;
+                        }
+                    }
+
                 }
                 regest.setCurrentUserName(userName);
             }
@@ -135,11 +145,21 @@ class LogIn {
             } else {
                 while (!userLogin(userName, password) && count < 5) {
                     count++;
-                    System.out.println("用户名或密码错误！");
+                    System.out.println("用户名或密码错误！请重新输入：");
                     System.out.print("用户名：");
                     userName = scanner.next();
-                    System.out.print("密码：");
-                    password = isTrueEnter.passwordhefa(scanner.next());
+                    if(userExit(userName)){
+                        System.out.print("密码：");
+                        password = isTrueEnter.passwordhefa(scanner.next());
+                    }else{
+                        System.out.println("用户名或密码错误，是否继续？（Y/N）");
+                        String confirm=scanner.next();
+                        if(!confirm.equalsIgnoreCase("Y")){
+                            count=10;
+                            break;
+                        }
+                    }
+
                 }
                 regest.setCurrentUserName(userName);
             }
@@ -186,7 +206,7 @@ class Regest {
         fillCellWithData(filePath,"UserMaster",inforList);
     }
 
-    private String getCurrentDate() {
+    public String getCurrentDate() {
         LocalDateTime now = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         return now.format(formatter);
@@ -283,14 +303,14 @@ class Regest {
         return fileContent;
     }
 
-    public void modifyCellValue(String filePath, String sheetName, int rowIndex, int cellIndex, String newValue) {
+    public boolean modifyCellValue(String filePath, String sheetName, int rowIndex, int cellIndex, String newValue) {
         try (FileInputStream fis = new FileInputStream(new File(filePath));
              Workbook workbook = new XSSFWorkbook(fis)) {
             Sheet sheet = workbook.getSheet(sheetName);
 
             // 获取要修改的行和单元格
             Row row = sheet.getRow(rowIndex);
-            Cell cell = row.getCell(cellIndex);
+            Cell cell = row.getCell(cellIndex-1);
 
             // 修改单元格的值
             cell.setCellValue(newValue);
@@ -298,11 +318,12 @@ class Regest {
             // 保存修改后的 Excel 文件
             try (FileOutputStream fos = new FileOutputStream(filePath)) {
                 workbook.write(fos);
-                System.out.println("Excel文件已成功修改！");
+                return true;
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return false;
     }
 
 }

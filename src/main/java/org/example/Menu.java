@@ -6,10 +6,10 @@ import java.io.IOException;
 import java.util.Scanner;
 
 class Menu {
-    Regest regest=new Regest();
+    Regest regest = new Regest();
     private final String basePath = System.getProperty("user.dir") + "//src//main//java//org//example//text//";
 
-    public void clear(){
+    public void clear() {
         try {
             if (System.getProperty("os.name").contains("Windows")) {
                 new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
@@ -21,19 +21,23 @@ class Menu {
             e.printStackTrace();
         }
     }
-    public void consoleDelay(long second){
+
+    public void consoleDelay(long second) {
         try {
             Thread.sleep(second); // 延迟三秒
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }
+
     String xuanze;
-    public void next(){
+
+    public void next() {
         System.out.println("请按任意键继续..");
-        Scanner scanner=new Scanner(System.in);
-        xuanze=scanner.nextLine();
+        Scanner scanner = new Scanner(System.in);
+        xuanze = scanner.nextLine();
     }
+
     private void showFileContent(String fileName) {
         clear();
         String filePath = basePath + fileName;
@@ -47,12 +51,14 @@ class Menu {
         }
     }
 
-    public void showHome(){showFileContent("Home.txt"); }
+    public void showHome() {
+        showFileContent("Home.txt");
+    }
 
-    public void showMaster(){
+    public void showMaster() {
         clear();
         System.out.println("============================================");
-        System.out.println("               管理员"+regest.getCurrentuserName()+",你好！");
+        System.out.println("               管理员" + regest.getCurrentuserName() + ",你好！");
         System.out.println("   您可以做以下操作：");
         System.out.println("       0--退出登录");
         System.out.println("       1--密码管理");
@@ -61,27 +67,49 @@ class Menu {
         System.out.println("============================================");
     }
 
-    public void showpasswordMaster(){showFileContent("passwordMaster.txt");}
+    public void showpasswordMaster() {
+        showFileContent("passwordMaster.txt");
+    }
 
-    public void showductionMaster() {showFileContent("ductionMaster.txt");}
+    public void showductionMaster() {
+        showFileContent("ductionMaster.txt");
+    }
 
-    public void showuserMaster() {showFileContent("userMaster.txt");}
-    public void showCheck(){showFileContent("CheckStyle.txt");}
-    public void showpasswordUser() {showFileContent("passwordUser.txt");}
+    public void showuserMaster() {
+        showFileContent("userMaster.txt");
+    }
 
-    public void showShopUser() {showFileContent("ShopUser.txt");}
+    public void showCheck() {
+        showFileContent("CheckStyle.txt");
+    }
 
-    public void showUser() {showFileContent("UserHome.txt");}
+    public void showpasswordUser() {
+        showFileContent("passwordUser.txt");
+    }
 
-    public void showSearchStyle(){showFileContent("SearchStyle.txt");}
+    public void showShopUser() {
+        showFileContent("ShopUser.txt");
+    }
+
+    public void showUser() {
+        showFileContent("UserHome.txt");
+    }
+
+    public void showSearchStyle() {
+        showFileContent("SearchStyle.txt");
+    }
 
     public void showSecondUser() {
         clear();
         System.out.println("==============================");
-        System.out.println("      欢迎您！"+regest.getCurrentuserName());
+        System.out.println("      欢迎您！" + regest.getCurrentuserName());
         System.out.println("         0--退出登录");
         System.out.println("         1--密码管理");
         System.out.println("         2--开始购物");
         System.out.println("==============================");
+    }
+
+    public void showDuctionModify() {
+        showFileContent("DuctionModify.txt");
     }
 }
