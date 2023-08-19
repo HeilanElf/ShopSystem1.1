@@ -18,8 +18,7 @@ class LogIn {
     Scanner scanner = new Scanner(System.in);
     private final String basePath = System.getProperty("user.dir") + "//src//main//java//org//example//ShujuData//";
     private final String MASTER_FILE = basePath + "Master.xlsx";
-    private final String USER_FILE = basePath + "User.xlsx";
-    private final String PASSWORD_SHEET = "password";
+    
 
     public boolean adminLogin(String username, String password) {
         return checkLogin(MASTER_FILE, "Master", username, password);
@@ -52,7 +51,7 @@ class LogIn {
                     }
                 }
             }
-
+            workbook.close();
             fis.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -84,7 +83,7 @@ class LogIn {
                     }
                 }
             }
-
+            workbook.close();
             fis.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -194,6 +193,7 @@ class LogIn {
 }
 
 class Regest {
+    Scanner scanner = new Scanner(System.in);
     private final String basePath = System.getProperty("user.dir") + "//src//main//java//org//example//ShujuData//";
     public void userRegest(String userName) {
         String filePath=basePath+"Master.xlsx";
@@ -231,7 +231,7 @@ class Regest {
     }
 
     private String getInput(String prompt) {
-        Scanner scanner = new Scanner(System.in);
+        
         System.out.print(prompt);
         return scanner.nextLine().trim();
     }

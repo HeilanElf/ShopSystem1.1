@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 class Menu {
     Regest regest = new Regest();
+    Scanner scanner = new Scanner(System.in);
     private final String basePath = System.getProperty("user.dir") + "//src//main//java//org//example//text//";
 
     public void clear() {
@@ -34,7 +35,7 @@ class Menu {
 
     public void next() {
         System.out.println("请按任意键继续..");
-        Scanner scanner = new Scanner(System.in);
+        
         xuanze = scanner.nextLine();
     }
 

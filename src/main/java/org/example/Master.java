@@ -333,7 +333,7 @@ class UserMaster {
                             }
                         }
                         // 删除最后一个逗号
-                        rowData.deleteCharAt(rowData.length() - 1);
+                      //  rowData.deleteCharAt(rowData.length() - 1);
                         infoList.add(rowData.toString());
                     }
                 }
